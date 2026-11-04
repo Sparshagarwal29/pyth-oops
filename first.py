@@ -7,12 +7,17 @@ class Car:  # classes name is always in captical letter
         return f"{self.brand} {self.model}"
     def fuel_type(self):  #this is polymorphism
         return "petrol on diesel"
+    @staticmethod  #this static method id decorators
+    def genral_description(): # we do not need the self here and with static method attachd object cannot acces this fuction but the class can 
+        return "car are means of transportation"
+
 
 
 my_car = Car("Toyota", "Corolla")  
 print(f"My car is a {my_car.brand} {my_car.model}.")  
 print(f"{my_car.fullname()}.")  
 print(f"{my_car.fuel_type()}")  
+print(Car.genral_description()) #this would work because of static method 
 
 
 
