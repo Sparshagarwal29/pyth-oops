@@ -21,3 +21,7 @@ class ElectricCar(Car):
         self.battery_size = battery_size
 my_tesla =  ElectricCar("Tesla", "Model S","100kwh")
 print(my_tesla.fullname())
+
+
+#  encapsulation --> to make a attribute private we need to put "__ "  for eg self.__brand would make the brand attribute pvt
+
