@@ -46,7 +46,7 @@ class Member:
         return f"Member(name='{self.name}', id='{self.member_id}')"
 
 
-class libary:
+class Libary:
     def __init__(self,name):
         self.name = name
         self.books = []  #this iw what we call compostion 
@@ -61,4 +61,30 @@ class libary:
 
     def registered_member(self,member: Member):
         self.members.append(member)
-    
+
+
+# this borrowsession act as a context manager 
+# context manger have 3 function __init__ , __enter__ , __exit__ 
+class BorrowSession:
+    def __init__(self,library:Libary,member:Member,book:Book):
+        self.library= library
+        self.member = member
+        self.book = book
+
+    def __enter__(self):
+        if not self.library.iss_book_availbale(self.book):
+            return f"{self.book.title} by author{self.book.author} does not exit in {self.library.name}"
+        self.library.books.remove(self.book)
+        self.member.borrowed_books.append(self.book)
+        print(f"-> [BORROWED] '{self.book.title}' checked out to {self.member.name}.")
+        return self.book
+# exc_type	Exception class/type
+# exc_val	Exception object containing the error details
+# exc_tb	Traceback information (where the error occurred)
+    def __exit__(self, exc_type, exc_val, tb):
+        if self.book in self.member.borrowed_books:
+            self.member.borrowed_books.remove(self.book)
+            self.library.add_book(self.book)
+        if exc_type:
+            print (f"an error occur inside{exc_val}")
+        return False
