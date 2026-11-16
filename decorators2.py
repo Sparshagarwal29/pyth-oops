@@ -11,11 +11,16 @@
 def debug(func):
     def wrapper(*args, **kwargs):
        args_value = ' ,'.join(str(arg) for arg in args ) # this we are working with arguments 
-       kwargs_value =', '. join (f"{k}={v}" for k ,v in kwargs) # this is we are working with k value pairs 
+       kwargs_value =', '. join (f"{k}={v}" for k ,v in kwargs.items()) # this is we are working with k value pairs 
        print(f"calling {func.__name__} with args {args_value} and kwargs {kwargs_value}")
        return func(*args, *kwargs)
 
     return wrapper
 
-def greeting(name,greeting ="good morning"):
+
+@debug
+def greet(name,greeting ="good morning"):
     print(f"{greeting} , {name}")
+
+
+greet("sparsh","namaste")
