@@ -9,7 +9,7 @@ def outter_function(msg):
 
 
 # we need to find the execution time of the function 
-
+# this is the trimer function 
 import time
 def execution_time(func):
     def wapper(*args):
